@@ -2,6 +2,10 @@ namespace ProjectGameRPG.src.entities
 {
     public class Hero
     {
+        public Hero (){
+            this.Name = string.Empty;
+            this.HeroType = string.Empty;
+        }
         public Hero(string Name, int Level, string HeroType)
         {
             this.Name = Name;
@@ -15,7 +19,7 @@ namespace ProjectGameRPG.src.entities
         public override string ToString(){
             return this.Name + " " + this.Level +  " "+ this.HeroType;
         }
-        public string Attack(){
+        public virtual string Attack(){
             return this.Name + "atacou com sua espada";
         }
     }
