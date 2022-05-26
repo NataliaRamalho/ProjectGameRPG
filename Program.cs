@@ -1,2 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ProjectGameRPG.src.entities;
+using static System.Console;
+
+class Program{
+    static void Main(string[] args){
+        Hero hero = new Hero("Arus", 10, "Knight");
+        WriteLine(hero);
+    }
+}
