@@ -1,6 +1,6 @@
 namespace ProjectGameRPG.src.entities
 {
-    public class Hero
+    public abstract class Hero
     {
         public Hero (){
             this.Name = string.Empty;
