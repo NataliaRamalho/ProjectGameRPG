@@ -15,7 +15,13 @@ namespace ProjectGameRPG.src.Entities
             return this.Name + "Lançou magia";
         }
         public string Attack(int Bonus){
-            return this.Name + "Lançou magia com bonus de ataque de " + Bonus;
+            if(Bonus > 6){
+                return this.Name + "Lançou magia super efetiva com bonus de " + Bonus;
+            }
+            else
+            {
+                return this.Name + "Lançou uma magia com força fraca com bonus de " + Bonus;
+            }
         }
     }
 }
