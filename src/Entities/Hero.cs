@@ -18,14 +18,21 @@ namespace ProjectGameRPG.src.entities
         public string getName(){
             return this.Name;
         }
+        public int getHealthPoint(){
+            return this.HealthPoints;
+        }
 
         public virtual string Attack(Hero hero){
+            if(hero.getHealthPoint() == 0 || this.HealthPoints == 0){
+                string deadHero = this.HealthPoints == 0 ? this.Name : hero.getName(); 
+                return "Não é possivel realizar o ataque!!. O heroi " + deadHero +" morreu.";
+            }
             string message;
             this.ExperiencePoints= this.ExperiencePoints + 15;
             message = hero.ReceiveAttack(-10);
             bool levelUp = this.IsLevelUp();
             if(levelUp){
-                return this.Name + " atacou " + hero.getName() + "\n " + hero.getName() + " subiu de nível!!" + "\n" + message;
+                return this.Name + " atacou " + hero.getName() + "\n" + hero.getName() + "subiu de nível!!" + "\n" + message;
             }
             return this.Name + " atacou " + hero.getName() + "\n" + message;
         }
