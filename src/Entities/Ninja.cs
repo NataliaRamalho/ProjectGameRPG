@@ -11,7 +11,7 @@ namespace ProjectGameRPG.src.Entities
         public string Attack(Hero hero, int bonus){
             string message;
             this.ExperiencePoints=+20;
-            message = hero.ReceiveAttack(10 + bonus);
+            message = hero.ReceiveAttack(-(10 + bonus));
             bool levelUp = this.IsLevelUp();
             if(levelUp){
                 return this.Name + " atacou " + hero.getName() + " com bonus de ataque de: " + bonus +  "\n " + hero.getName() + "com bonus de ataque de: " + " subiu de nível!!" + "\n" + message;
