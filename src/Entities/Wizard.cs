@@ -18,11 +18,12 @@ namespace ProjectGameRPG.src.Entities
             int pointsAttack = this.CalculatePointsAttack();
             message = hero.ReceiveAttack(pointsAttack);
             bool levelUp = this.IsLevelUp();
+            string typeAttack = this.MagicType == EnumMagicTypes.Healing ? "curou" : "atacou";
             if(levelUp){
-                return this.Name + " atacou com sua magia de  " + this.MagicType + " o heroi " + hero.getName()
+                return this.Name + " "+ typeAttack + " com sua magia de " + this.MagicType + " o heroi " + hero.getName()
                  + "\n " + hero.getName() + " subiu de nível!" + "\n" + message;
             }
-            return this.Name + " atacou com sua magia de  " + this.MagicType + " o heroi " + hero.getName() + "\n" + message;
+            return this.Name + " " + typeAttack + " com sua magia de " + this.MagicType + " o heroi " + hero.getName() + "\n" + message;
         }
 
         private int CalculatePointsAttack()
@@ -47,7 +48,8 @@ namespace ProjectGameRPG.src.Entities
         
         public override string ToString(){
             return "--------" + "\n" + "Nome do Heroi: " + this.Name + "\n" + "Level: " + this.Level +  "\n" +"Vida: "+ this.HealthPoints 
-            + "\n" +"Pontos de experiencia: " + ExperiencePoints+ "\n" + "Tipo de magia: " +  this.MagicType + "\n"+ "--------" ;
+            + "\n" +"Pontos de experiencia: " + ExperiencePoints
+            + "\n" + "Tipo de magia: " +  this.MagicType;
         }
     }
 }
