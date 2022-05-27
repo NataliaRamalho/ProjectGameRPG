@@ -1,27 +1,53 @@
 
 using ProjectGameRPG.src.entities;
+using ProjectGameRPG.src.Enums;
 
 namespace ProjectGameRPG.src.Entities
 {
     public class Wizard : Hero
     {
-        public Wizard(string Name, int Level, string HeroType)
+        private EnumMagicTypes MagicType;
+        public Wizard(string Name, int Level, EnumMagicTypes MagicType) : base(Name, Level)
         {
-            this.Name = Name;
-            this.Level = Level;
-            this.HeroType = HeroType;
+            this.MagicType = MagicType;
         }
-        public override string Attack(){
-            return this.Name + "Lançou magia";
+
+        public override string Attack(Hero hero){
+            string message;
+            this.ExperiencePoints= + 30;
+            int pointsAttack = this.CalculatePointsAttack();
+            message = hero.ReceiveAttack(pointsAttack);
+            bool levelUp = this.IsLevelUp();
+            if(levelUp){
+                return this.Name + " atacou com sua magia de  " + this.MagicType + " o heroi " + hero.getName()
+                 + "\n " + hero.getName() + " subiu de nível!" + "\n" + message;
+            }
+            return this.Name + " atacou com sua magia de  " + this.MagicType + " o heroi " + hero.getName() + "\n" + message;
         }
-        public string Attack(int Bonus){
-            if(Bonus > 6){
-                return this.Name + "Lançou magia super efetiva com bonus de " + Bonus;
+
+        private int CalculatePointsAttack()
+        {
+            int pointsAttack;
+            switch(this.MagicType){
+                case EnumMagicTypes.Fire:
+                    pointsAttack = -20;
+                    break;
+                case EnumMagicTypes.Ice:
+                    pointsAttack = -30;
+                    break;
+                case EnumMagicTypes.Healing:
+                    pointsAttack = 5;
+                    break;
+                default:
+                    pointsAttack = -10;
+                    break;
             }
-            else
-            {
-                return this.Name + "Lançou uma magia com força fraca com bonus de " + Bonus;
-            }
+            return pointsAttack;
+        }
+        
+        public override string ToString(){
+            return "--------" + "\n" + "Nome do Heroi: " + this.Name + "\n" + "Level: " + this.Level +  "\n" +"Vida: "+ this.HealthPoints 
+            + "\n" +"Pontos de experiencia: " + ExperiencePoints+ "\n" + "Tipo de magia: " +  this.MagicType + "\n"+ "--------" ;
         }
     }
 }
