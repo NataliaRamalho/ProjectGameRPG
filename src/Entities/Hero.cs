@@ -2,25 +2,68 @@ namespace ProjectGameRPG.src.entities
 {
     public abstract class Hero
     {
-        public Hero (){
-            this.Name = string.Empty;
-            this.HeroType = string.Empty;
-        }
-        public Hero(string Name, int Level, string HeroType)
+        protected string Name;
+        protected int Level;
+        protected int HealthPoints;
+        protected int ExperiencePoints;
+
+        public Hero(string Name, int Level)
         {
             this.Name = Name;
             this.Level = Level;
-            this.HeroType = HeroType;
-        }
-        public string Name;
-        public int Level;
-        public string HeroType;
+            this.HealthPoints = this.CalculateLife();
+            this.ExperiencePoints = 0;
 
-        public override string ToString(){
-            return this.Name + " " + this.Level +  " "+ this.HeroType;
         }
-        public virtual string Attack(){
-            return this.Name + "atacou com sua espada";
+        public string getName(){
+            return this.Name;
+        }
+
+        public virtual string Attack(Hero hero){
+            string message;
+            this.ExperiencePoints= this.ExperiencePoints + 15;
+            message = hero.ReceiveAttack(-10);
+            bool levelUp = this.IsLevelUp();
+            if(levelUp){
+                return this.Name + " atacou " + hero.getName() + "\n " + hero.getName() + " subiu de nível!!" + "\n" + message;
+            }
+            return this.Name + " atacou " + hero.getName() + "\n" + message;
+        }
+
+        public bool IsLevelUp()
+        {
+            int maxExperiencePoints = this.Level * 100;
+            if(this.ExperiencePoints >= maxExperiencePoints){
+                int experiencePoints = maxExperiencePoints - this.ExperiencePoints;
+                this.LevelUp(experiencePoints);
+                return true;
+            }
+            return false;
+        }
+
+        public virtual string ReceiveAttack(int AttackPoints){
+            if(this.HealthPoints > AttackPoints){
+                this.HealthPoints = this.HealthPoints + AttackPoints;
+                return this.Name + " recebeu um ataque de "+ AttackPoints;
+            }
+            else{
+                this.HealthPoints = 0;
+                return this.Name + " recebeu um ataque de "+ AttackPoints + " e morreu.";
+            }
+        }
+
+        private int CalculateLife(){
+           return this.Level * 50;
+        }
+
+        private void LevelUp(int ExperiencePoints){
+            this.Level++;
+            this.HealthPoints = CalculateLife();
+            this.ExperiencePoints = ExperiencePoints;
+        }
+        public override string ToString(){
+            return "--------" + "\n" + "Nome do Heroi: " + this.Name + "\n" + "Level: " + this.Level +  "\n" +"Vida: "+ this.HealthPoints 
+            + "\n" +"Pontos de experiencia: " + ExperiencePoints+ "\n" + "--------" ;
         }
     }
 }
