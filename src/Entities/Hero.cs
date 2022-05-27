@@ -63,7 +63,7 @@ namespace ProjectGameRPG.src.entities
         }
         public override string ToString(){
             return "--------" + "\n" + "Nome do Heroi: " + this.Name + "\n" + "Level: " + this.Level +  "\n" +"Vida: "+ this.HealthPoints 
-            + "\n" +"Pontos de experiencia: " + ExperiencePoints+ "\n" + "--------" ;
+            + "\n" +"Pontos de experiencia: " + ExperiencePoints;
         }
     }
 }
