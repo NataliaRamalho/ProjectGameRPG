@@ -16,10 +16,10 @@ namespace ProjectGameRPG.src.Entities
         }
         public override string ReceiveAttack(int AttackPoints){
             int maxHealthPoints = this.HealthPoints + this.ShieldPoints;
-            if(maxHealthPoints > AttackPoints){
-                if(this.HealthPoints < AttackPoints){
-                    int rest = AttackPoints - this.HealthPoints;
-                    this.ShieldPoints = this.ShieldPoints + rest;
+            if((maxHealthPoints + AttackPoints) > 0){
+                if((this.HealthPoints + AttackPoints) < 0){
+                    int rest = this.HealthPoints + AttackPoints;
+                    this.ShieldPoints = this.ShieldPoints - rest;
                 }
                 this.HealthPoints = this.HealthPoints + AttackPoints;
                 return this.Name + " recebeu um ataque de "+ AttackPoints;
@@ -32,7 +32,8 @@ namespace ProjectGameRPG.src.Entities
         }
         public override string ToString(){
             return "--------" + "\n" + "Nome do Heroi: " + this.Name + "\n" + "Level: " + this.Level +  "\n" +"Vida: "+ this.HealthPoints 
-            + "\n" +"Pontos de experiencia: " + ExperiencePoints+ "\n" + "Pontos de escudo: " + this.ShieldPoints + "\n"+ "--------" ;
+            + "\n" +"Pontos de experiencia: " + ExperiencePoints+ "\n"
+             + "Pontos de escudo: " + this.ShieldPoints;
         }
     }
 }
