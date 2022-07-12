@@ -15,4 +15,6 @@ Projeto desenvolvido durante o bootcamp GFT start. Nesse projeto, utiliza-se a o
  dotnet run
 ```
 
-Parabéns o código está executando 😃
+Parabéns o código está executando 😃  
+
+⏰ Projeto desenvolvido em maio/2022
